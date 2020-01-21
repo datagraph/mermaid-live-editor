@@ -101,7 +101,8 @@ onMount(async () => {
 export const onUpdateSource = event => {
   console.log("onUpdateSource");
   var idElement = document.getElementById('sourceURL');
-  var id = idElement.value;
+  var sharedUrl = idElement.value;
+  var id = sharedUrl.replace(/https:\/\/docs.google.com\/document\/d\//, '').replace(/\/edit\?usp=sharing/, '');
   console.log(idElement, id);
   var url = 'https://docs.google.com/document/u/0/export?format=txt&id=' + id;
   console.log('codeStore' , codeStore);
@@ -132,4 +133,4 @@ const updateCode = text => {
 	<Error errorText="Syntax Error"/>
 	{/if}
 </div>
-<div style="paddingTop: 20px"><span on:click={onUpdateSource}>Source: </span><input type="text" id="sourceURL"/></div>
+<div style="paddingTop: 20px"><span on:click={onUpdateSource}>Source: </span><input type="text" id="sourceURL" size="32"/></div>
