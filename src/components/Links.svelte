@@ -5,7 +5,7 @@ import { Base64 } from 'js-base64'
 import { onMount } from 'svelte';
 import moment from 'moment';
 import { codeStore } from '../code-store.js';
-
+import mermaid from '@mermaid';
 onMount(async () => {
 });
 
@@ -80,15 +80,16 @@ label[for="markdown"] {
 }
 </style>
 
+
 <div id="links" >
-	<a href="{url}" use:link>Link to view</a>
-	<a href="{url}" download='' on:click={onDownloadSVG}>
+	<div><a href="{url}" use:link>Link to view</a></div>
+	<div><a href="{url}" download='' on:click={onDownloadSVG}>
 		Download SVG
-	</a>
-	<a href={iUrl}>Link to Image</a>
-	<a href="{url}" download='' on:click={onDownloadPNG}>
+	</a></div>
+	<div><a href={iUrl}>Link to Image</a></div>
+	<div><a href="{url}" download='' on:click={onDownloadPNG}>
 		Download PNG
-	</a>
+	</a></div>
 </div>
 <p>
   <label for="markdown">Copy Markdown</label>

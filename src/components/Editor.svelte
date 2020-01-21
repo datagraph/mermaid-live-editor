@@ -57,7 +57,7 @@ const unsubscribe = codeStore.subscribe( state => {
 		conf = state.mermaid;
 	}
 	if(!edit && code && (editorElem !== null)) {
-		console.log('creatinf editor');
+		console.log('creating editor');
 		edit = monaco.editor.create(editorElem, {
 			value: [
 				code,
@@ -97,6 +97,23 @@ onMount(async () => {
 
 	// export let name;
 	// export let params = {};
+
+export const onUpdateSource = event => {
+  console.log("onUpdateSource");
+  var idElement = document.getElementById('sourceURL');
+  var id = idElement.value;
+  console.log(idElement, id);
+  var url = 'https://docs.google.com/document/u/0/export?format=txt&id=' + id;
+  console.log('codeStore' , codeStore);
+  fetch(url).then(function(response) { return(response.text()); }).
+  				     then(function(text) { updateCode(text); } );
+}
+
+const updateCode = text => {
+  console.log("updateCode: text", text);
+  console.log("updateCode: edit", edit);
+  edit.getModel().setValue(text);
+}
 </script>
 
 <style>
@@ -115,3 +132,4 @@ onMount(async () => {
 	<Error errorText="Syntax Error"/>
 	{/if}
 </div>
+<div style="paddingTop: 20px"><span on:click={onUpdateSource}>Source: </span><input type="text" id="sourceURL"/></div>
